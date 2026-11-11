@@ -9,10 +9,8 @@ Solución de la prueba práctica de Data Engineer: una sección de **SQL (SQLite
 ```
 prueba-tecnica-data-engineer/
 ├── Prueba_Tecnica_DE_Data_Engineer_Banco_Pichincha_Freddy_Navarrete.ipynb   # notebook con la solución y la evidencia de ejecución
-├── data/
-│   └── CENTROS_EDUCATIVOS_MADRID.json                                       # insumo de la Pregunta 5
-├── output/
-│   └── jugadores_estrella.json                                              # salida de la Pregunta 4 (pedido 3.4)
+├── CENTROS_EDUCATIVOS_MADRID.json                                           # insumo de la Pregunta 5
+├── jugadores_estrella.json                                                  # salida de la Pregunta 4 (pedido 3.4)
 └── README.md
 ```
 
@@ -20,7 +18,7 @@ prueba-tecnica-data-engineer/
 
 1. Abrir el notebook en [Google Colab](https://colab.research.google.com/).
 2. Ejecutar la celda de configuración del ambiente (Spark + SQLite) y luego la celda de reinicio, como indica el notebook.
-3. Subir `data/CENTROS_EDUCATIVOS_MADRID.json` a la ruta `/content`.
+3. Subir `CENTROS_EDUCATIVOS_MADRID.json` a la ruta `/content`.
 4. Ejecutar el resto de celdas en orden. La Pregunta 6 reutiliza los DataFrames de la Pregunta 5.
 
 Cada pregunta se resuelve en una sola celda de código y los enunciados se mantienen sin cambios.
@@ -45,7 +43,7 @@ Cada pregunta se resuelve en una sola celda de código y los enunciados se manti
 | **5. Centro educativo más céntrico** | Lectura `multiLine`, exclusión de 4 centros sin coordenadas, promedio de X/Y por `centro_titularidad`, **UDF** de distancia euclidiana (validada contra funciones nativas, diferencia 0) y `row_number()` por grupo. | Un centro de reunión por cada uno de los 4 tipos de titularidad. Las coordenadas son UTM (m), así que la distancia queda en metros. |
 | **6. Exportación y formato** | Exportación a Parquet, JSON y CSV (`sep='\|'`, con cabecera) en `/tmp`, con relectura para validar el número de registros y comparación de tamaños. | **Parquet / Delta Lake** como formato recomendado. Con el dataset completo, Parquet ocupó ~264 KB frente a ~794 KB en CSV y ~2,2 MB en JSON. |
 
-**Calidad de datos detectada en la Pregunta 4:** los nombres de país traen espacios de no separación (` `), que `trim()` no elimina; se reemplazan antes de limpiar.
+**Calidad de datos detectada en la Pregunta 4:** los nombres de país traen espacios de no separación (`\u00A0`), que `trim()` no elimina; se reemplazan antes de limpiar.
 
 ## Tecnologías
 
